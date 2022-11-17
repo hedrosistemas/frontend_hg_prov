@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/comm.css">
+    <link rel="stylesheet" href="css/tab.css">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/switch.css">
+    <title>HEDRO</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tab" id="tab">
+            <button id="bt_tab_wifi" class="tablinks">WiFi</button>
+            <button id="bt_tab_eth" class="tablinks">Ethernet</button>
+            <button id="bt_tab_ntp" class="tablinks">NTP</button>
+            <button id="bt_tab_login" class="tablinks">Login</button>
+            <button id="bt_tab_prov" class="tablinks">Prov</button>
+        </div>
+        <div id="tab_wifi" class="tabcontent" style="display: none;">
+            <ul>
+                <div class="card" id="card_sw_wifi">
+                    <li class="field">
+                        <span class="switch-label">WiFi</span>
+                        <label class="switch">
+                            <input type="checkbox" id="sw_wifi">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </div>
+
+                <div class="field" id="wifi_current_network" style="display: none;">
+                    Rede atual:
+                    <div class="card">
+                        <li>
+                            <img class="icon" src="./img/wifi.png">
+                            <label id="conn_ssid">Connected WiFi</label>
+                        </li>
+                    </div>
+                </div>
+            </ul>
+            <div class="field" id="available_networks">
+                Redes disponíveis:
+                <div class="field">
+                    <ul>
+                        <div class="card" id="ssid_list">
+                            <li class="wifi-item">
+                                <div id="loader" class="loader"></div>
+                            </li>
+                            <li class="wifi-item" id="bt_add_network">
+                                <span class="icon" style="color: green;">&#10011</span>Add network
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <ul id="form_wifi" style="display: none;">
+                <img class="back" src="img/back.png" alt="" srcset="" id="bt_back">
+                <span class="ssid-text" id="ssid_text">
+                </span>
+                <form class="card">
+                    <li class="field" id="field_ssid" style="display: none;">
+                        SSID:
+                        <input class="input" id="wifi_ssid" type="text">
+                        <span class="error" id="wifi_ssid_err">Error</span>
+                    </li>
+                    <div id="form_enterprise" style="display: none;">
+                        <li id="eap_field" class="field">
+                            EAP ID:
+                            <input class="input" id="eap_id" type="text">
+                        </li>
+                        <li id="netuser_field" class="field">
+                            Usuário:
+                            <input class="input" id="netuser" type="text">
+                        </li>
+                    </div>
+                    <li class="field">
+                        Senha:
+                        <input class="input" id="wifi_pass" type="password">
+                        <span class="error" id="wifi_pass_err">Error</span>
+                        <input class="checkbox" type="checkbox" id="cb_wifi_show_pass">
+                        Exibir Senha
+                    </li>
+                </form>
+                <div class="card" id="card_sw_enterprise">
+                    <li id="security_field" class="field">
+                        <span class="switch-label">Rede Corporativa</span>
+                        <label class="switch">
+                            <input type="checkbox" id="sw_enterprise">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </div>
+                <div class="card" id="card_sw_ip_wifi">
+                    <li id="security_field" class="field">
+                        <span class="switch-label">IP Estático</span>
+                        <label class="switch">
+                            <input type="checkbox" id="sw_ip_wifi">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </div>
+                <form class="card" id="form_ip_wifi" style="display: none;">
+                    <li class="field">
+                        IP:
+                        <input class="input" id="wifi_ip" type="text">
+                        <span class="error" id="wifi_ip_err">Error</span>
+                    </li>
+                    <li class="field">
+                        Máscara:
+                        <input class="input" id="wifi_mask" type="text">
+                        <span class="error" id="wifi_mask_err">Error</span>
+                    </li>
+                    <li class="field">
+                        Gateway:
+                        <input class="input" id="wifi_gateway" type="text">
+                        <span class="error" id="wifi_gateway_err">Error</span>
+                    </li>
+                    <li class="field">
+                        DNS:
+                        <input class="input" id="wifi_dns" type="text">
+                        <span class="error" id="wifi_dns_err">Error</span>
+                    </li>
+                    <li>
+                    </li>
+                </form>
+                <div>
+                    <button id="bt_wifi_connect" class="btn">
+                        Conectar
+                    </button>
+                </div>
+            </ul>
+        </div>
+        <div id="tab_eth" class="tabcontent" style="display: none;">
+            <ul>
+                <div class="card" id="card_sw_eth">
+                    <li class="field">
+                        <span class="switch-label">Ethernet</span>
+                        <label class="switch">
+                            <input type="checkbox" id="sw_eth">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </div>
+            </ul>
+
+            <ul id="form_eth" style="display: none;">
+                <div class="card" id="card_sw_ip_eth">
+                    <li id="security_field" class="field">
+                        <span class="switch-label">IP Estático</span>
+                        <label class="switch">
+                            <input type="checkbox" id="sw_ip_eth">
+                            <span class="slider round"></span>
+                        </label>
+                    </li>
+                </div>
+                <form class="card" id="form_ip_eth" style="display: none;">
+                    <li class="field">
+                        IP:
+                        <input class="input" id="eth_ip" type="text">
+                        <span class="error" id="eth_ip_err">Error</span>
+                    </li>
+                    <li class="field">
+                        Máscara:
+                        <input class="input" id="eth_mask" type="text">
+                        <span class="error" id="eth_mask_err">Error</span>
+                    </li>
+                    <li class="field">
+                        Gateway:
+                        <input class="input" id="eth_gateway" type="text">
+                        <span class="error" id="eth_gateway_err">Error</span>
+                    </li>
+                    <li class="field">
+                        DNS:
+                        <input class="input" id="eth_dns" type="text">
+                        <span class="error" id="eth_dns_err">Error</span>
+                    </li>
+                    <li>
+                    </li>
+                </form>
+                <div>
+                    <button id="bt_eth_connect" class="btn">
+                        Conectar
+                    </button>
+                </div>
+            </ul>
+        </div>
+        <div id="tab_ntp" class="tabcontent">
+            <ul>
+                <li class="field">
+                    Modo de Operação:
+                    <select class="input" id="op_mode">
+                        <option value="pool">Pool Mode</option>
+                        <option value="listen">Listen Only</option>
+                    </select>
+                </li>
+                <li class="field">
+                    Modo de Sincronismo:
+                    <select class="input" id="sync_mode">
+                        <option value="immed">Imediato</option>
+                        <option value="smooth">Suave</option>
+                    </select>
+                </li>
+                <form>
+                    <li class="field">
+                        Servidor 1:
+                        <input class="input" id="server1" type="text">
+                        <span class="error" id="ntp_err">Error</span>
+                    </li>
+                    <li class="field">
+                        Servidor 2:
+                        <input class="input" id="server2" type="text">
+                    </li>
+                    <li class="field">
+                        Servidor 3:
+                        <input class="input" id="server3" type="text">
+                    </li>
+                </form>
+                <div>
+                    <button id="bt_ntp_send" class="btn">
+                        Enviar
+                    </button>
+                </div>
+            </ul>
+        </div>
+        <div id="tab_login" class="tabcontent">
+            <ul>
+                <form>
+                    <li class="field">
+                        Usuario:
+                        <input class="input" id="login_email" type="email">
+                        <span class="error" id="login_email_err">Error</span>
+                    </li>
+                    <li class="field">
+                        Senha:
+                        <input class="input" id="login_pass" type="password">
+                        <span class="error" id="login_pass_err">Error</span>
+                        <input id="cb_email_show_pass" class="checkbox" type="checkbox">
+                        Exibir Senha
+                    </li>
+                </form>
+                <li id="emailpass_field" class="center-text">
+                </li>
+                <div>
+                    <button id="bt_login" class="btn">
+                        Login
+                    </button>
+                </div>
+            </ul>
+        </div>
+        <div id="tab_prov" class="tabcontent">
+            <ul>
+                <div class="card">
+                    <li>
+                        <div class="field">
+                            <div>
+                                <label>Dispositivo</label>
+                            </div>
+                            <div class="field-value">
+                                <label id="field_device">unknown</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="field">
+                            <div>
+                                <label>Firmware</label>
+                            </div>
+                            <div class="field-value">
+                                <label id="field_firmware">unknown</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="field">
+                            <div>
+                                <label>MAC</label>
+                            </div>
+                            <div class="field-value">
+                                <label id="field_mac">unknown</label>
+                            </div>
+                        </div>
+                </div>
+            </ul>
+            <ul>
+                <div class="card" id="card_sw_wifi">
+                    <li class="field">
+                        <div>
+                            <label>Ethernet</label>
+                        </div>
+                        <div class="field-value">
+                            <label id="field_ethernet">unknown</label>
+                        </div>
+                    </li>
+                    <hr>
+                    <li class="field">
+                        <div>
+                            <label>WiFi</label>
+                        </div>
+                        <div class="field-value">
+                            <label id="field_wifi">unknown</label>
+                        </div>
+                    </li>
+                    <hr>
+                    <li class="field">
+                        <div>
+                            <label>NTP</label>
+                        </div>
+                        <div class="field-value">
+                            <label id="field_ntp">unknown</label>
+                        </div>
+                    </li>
+                    <hr>
+                    <li class="field">
+                        <div>
+                            <label>Cloud</label>
+                        </div>
+                        <div class="field-value">
+                            <label id="field_cloud">unknown</label>
+                        </div>
+                    </li>
+                    <hr>
+                    <li class="field">
+                        <div>
+                            <label>Bluetooth</label>
+                        </div>
+                        <div class="field-value">
+                            <label id="field_ble">unknown</label>
+                        </div>
+                    </li>
+                </div>
+                <div>
+                    <button id="bt_prov" class="btn">
+                        Provisionar
+                    </button>
+                </div>
+            </ul>
+        </div>
+        <div id="tab_conn" class="tabcontent">
+            <h1 style="text-align: center;">Buscando dispositivo</h1>
+            <p style="text-align: center;">Estabelecendo conexão com o dispositivo...</p>
+            <div id="loader" class="loader"></div>
+        </div>
+    </div>
+</body>
+<script src="./js/app.js" type="module"></script>
+
+</html>
