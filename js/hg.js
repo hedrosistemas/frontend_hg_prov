@@ -1,7 +1,7 @@
 import HttpClient from "./http_client.js";
 import { EspHttpClientMethod, HardwareInfoDTO, HgAppHttpResponseDTO, HgAppSettingsDTO, LoginSession, NetworkStatusData, NetworkStatusDTO, ProvRequestDTO } from "./dtos.js";
 
-const url = 'https://192.168.4.1'
+const url = 'http://192.168.4.1'
 const currentAppVersion = '2.1'
 
 const routes = {
