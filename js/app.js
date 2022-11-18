@@ -97,6 +97,8 @@ async function init() {
 function toggleSwitch(id) {
     $(id).checked = !$(id).checked
     if ($(id).onclick) $(id).onclick()
+    hg.settings.wifi.disabled = $(id).checked == false
+    hg.settings.ethernet.disabled = $(id).checked == false
 }
 
 async function swWifi_onclick() {

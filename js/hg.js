@@ -103,7 +103,7 @@ export class Hg {
         var result = new HgAppHttpResponseDTO()
         await this.getNetworkStatus()
 
-        if (this.status.wifi_sta == false && this.settings.wifi.sta.ssid != "") {
+        if (this.status.wifi_sta == false && (this.settings.wifi.sta.ssid != "" && this.settings.wifi.disabled == false)) {
             result = await this.sendMessage(this.settings.wifi)
             if (result.err != HgErrCode.none) {
                 result.err = HgErrCode.provWifiFail
